@@ -43,14 +43,40 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _title() {
-    return const Text('Firebase Auth');
+    return const Center(child: Text('Foodly Auth'));
   }
 
-  Widget _entryField(
+  Widget _titleText() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(isLogin ? 'Login' : 'Register',
+          style: const TextStyle(
+              fontSize: 28,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+              fontFamily: 'RobotoMono')),
+    );
+  }
+
+  Widget _entryFieldEmail(
     String title,
     TextEditingController controller,
   ) {
     return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: title,
+      ),
+    );
+  }
+
+  Widget _entryFieldPassword(
+    String title,
+    TextEditingController controller,
+  ) {
+    return TextField(
+      obscureText: true,
       controller: controller,
       decoration: InputDecoration(
         labelText: title,
@@ -63,10 +89,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _submitButton() {
-    return ElevatedButton(
-      onPressed:
-          isLogin ? signInWithEmailAndPassword : createUserWithEmailAndPassword,
-      child: Text(isLogin ? 'Login' : 'Register'),
+    return SizedBox(
+      width: 200,
+      child: ElevatedButton(
+          onPressed: isLogin
+              ? signInWithEmailAndPassword
+              : createUserWithEmailAndPassword,
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ))),
+          child: Text(isLogin ? 'Login' : 'Register')),
     );
   }
 
@@ -77,26 +111,26 @@ class _LoginPageState extends State<LoginPage> {
           isLogin = !isLogin;
         });
       },
-      child: Text(isLogin ? 'Register instead' : 'Login instead'),
+      child: Text(isLogin
+          ? 'Not registered yet? Create an account'
+          : 'Already registered? Log in'),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: _title(),
-      ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _entryField('Email', _controllerEmail),
-            _entryField('Password', _controllerPassword),
+            _titleText(),
+            _entryFieldEmail('Email', _controllerEmail),
+            _entryFieldPassword('Password', _controllerPassword),
             _errorMessage(),
             _submitButton(),
             _loginOrRegisterButton(),
