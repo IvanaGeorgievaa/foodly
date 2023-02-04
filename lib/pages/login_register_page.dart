@@ -182,17 +182,19 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          _container(),
-          _titleText(),
-          _underText(),
-          _entryFieldEmail('Email', _controllerEmail),
-          _entryFieldPassword('Password', _controllerPassword),
-          _errorMessage(),
-          _submitButton(),
-          _loginOrRegisterButton(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            _container(),
+            _titleText(),
+            _underText(),
+            _entryFieldEmail('Email', _controllerEmail),
+            _entryFieldPassword('Password', _controllerPassword),
+            _errorMessage(),
+            _submitButton(),
+            _loginOrRegisterButton(),
+          ],
+        ),
       ),
     );
   }

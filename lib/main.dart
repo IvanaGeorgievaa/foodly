@@ -1,10 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodly_app/controllers/product_controller.dart';
 import 'package:foodly_app/widget_tree.dart';
+import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  final Future<FirebaseApp> initialization = Firebase.initializeApp();
+  await initialization.then((value) {
+    Get.put(ProducsController());
+  });
   runApp(const MyApp());
 }
 
