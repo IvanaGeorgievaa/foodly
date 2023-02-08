@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodly_app/models/product.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/shopping_cart.dart';
+
 class DetailsScreen extends StatelessWidget {
   final ProductModel product;
   const DetailsScreen({super.key, required this.product});
@@ -85,7 +87,7 @@ class DetailsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Container(
-              height: 290,
+              height: 280,
               width: 400,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
@@ -127,13 +129,15 @@ class DetailsScreen extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 10.0),
-            child: Text(
-              "Order Now >>",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          )
+          Padding(
+              padding: const EdgeInsets.only(left: 30, right: 30),
+              child: TextButton(
+                onPressed: () {Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ShoppingCartWidget()),);},
+                child: const Text('Order Now >>',
+                style: TextStyle(color: Colors.black),),
+              ))
         ],
       ),
     );
