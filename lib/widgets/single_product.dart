@@ -6,11 +6,10 @@ import '../models/product.dart';
 import '../pages/details_page.dart';
 
 class SingleProductWidget extends StatelessWidget {
-  final ProductModel product;
   CartController cartController = CartController.instance;
+  final ProductModel product;
 
-   SingleProductWidget({Key? key, required this.product})
-      : super(key: key);
+  SingleProductWidget({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,24 +45,6 @@ class SingleProductWidget extends StatelessWidget {
                         color: Colors.black),
                   ),
                 ),
-<<<<<<< HEAD
-                IconButton(
-                    icon: const Icon(Icons.add_shopping_cart),
-                    onPressed: () {
-                      cartController.addProductToCart(product);
-                    }),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10, bottom: 20, right: 10),
-                  child: ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                      ),
-                      child: Image.network(product.image, width: 120)),
-=======
               ),
               Align(
                 alignment: Alignment.centerLeft,
@@ -77,7 +58,6 @@ class SingleProductWidget extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                         color: Colors.grey),
                   ),
->>>>>>> 62efa6722692f7b1e1960f4a5e4c74494bfba18c
                 ),
               ),
               const SizedBox(
@@ -106,7 +86,9 @@ class SingleProductWidget extends StatelessWidget {
                   ),
                   IconButton(
                       icon: const Icon(Icons.add_shopping_cart),
-                      onPressed: () {}),
+                      onPressed: () {
+                        cartController.addProductToCart(product);
+                      }),
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 10, bottom: 20, right: 10),
