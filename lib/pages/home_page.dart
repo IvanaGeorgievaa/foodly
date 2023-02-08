@@ -4,6 +4,8 @@ import 'package:foodly_app/Authentication/auth.dart';
 import 'package:foodly_app/widgets/navbar.dart';
 import 'package:foodly_app/widgets/products.dart';
 
+import '../widgets/shopping_cart.dart';
+
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
@@ -43,7 +45,10 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(onPressed: () => Null, icon: const Icon(Icons.search)),
           IconButton(
-              onPressed: () => Null, icon: const Icon(Icons.shopping_bag))
+              onPressed: () =>  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  ShoppingCartWidget()),
+                  ), icon: const Icon(Icons.shopping_bag))
         ],
       ),
       body: Container(
