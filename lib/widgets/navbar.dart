@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodly_app/Authentication/auth.dart';
 import 'package:foodly_app/pages/home_page.dart';
+import 'package:foodly_app/widgets/shopping_cart.dart';
 
 class NavBar extends StatelessWidget {
   NavBar({Key? key}) : super(key: key);
@@ -48,14 +49,26 @@ class NavBar extends StatelessWidget {
                 )),
           ),
           ListTile(
+            leading: const Icon(Icons.restaurant),
+            title: const Text('Products'),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            ),
+          ),
+          ListTile(
             leading: const Icon(Icons.search),
             title: const Text('Search'),
             onTap: () => null,
           ),
           ListTile(
-              leading: const Icon(Icons.shopping_cart),
-              title: const Text('Cart items'),
-              onTap: () => Null),
+            leading: const Icon(Icons.shopping_cart),
+            title: const Text('Cart items'),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ShoppingCartWidget()),
+            ),
+          ),
           ListTile(
             leading: const Icon(Icons.location_on),
             title: const Text('Our location'),
