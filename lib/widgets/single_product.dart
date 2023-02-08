@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:foodly_app/controllers/cart_controller.dart';
 
 import '../custom_text.dart';
 import '../models/product.dart';
 
 class SingleProductWidget extends StatelessWidget {
   final ProductModel product;
+  CartController cartController = CartController.instance;
 
-  const SingleProductWidget({Key? key, required this.product})
+   SingleProductWidget({Key? key, required this.product})
       : super(key: key);
 
   @override
@@ -78,7 +80,9 @@ class SingleProductWidget extends StatelessWidget {
                 ),
                 IconButton(
                     icon: const Icon(Icons.add_shopping_cart),
-                    onPressed: () {}),
+                    onPressed: () {
+                      cartController.addProductToCart(product);
+                    }),
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 10, bottom: 20, right: 10),
