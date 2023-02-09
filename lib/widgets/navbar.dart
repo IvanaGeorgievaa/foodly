@@ -4,8 +4,11 @@ import 'package:foodly_app/Authentication/auth.dart';
 import 'package:foodly_app/pages/home_page.dart';
 import 'package:foodly_app/widgets/shopping_cart.dart';
 
+import '../controllers/product_controller.dart';
+
 class NavBar extends StatelessWidget {
   NavBar({Key? key}) : super(key: key);
+  ProducsController producsController = ProducsController.instance;
 
   final User? user = Auth().currentUser;
 
@@ -53,9 +56,7 @@ class NavBar extends StatelessWidget {
             title: const Text('Products'),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            ),
-          ),
+              MaterialPageRoute(builder: (context) => HomePage(main_list: producsController.products)))),
           ListTile(
             leading: const Icon(Icons.search),
             title: const Text('Search'),

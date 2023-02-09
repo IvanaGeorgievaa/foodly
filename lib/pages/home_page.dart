@@ -4,10 +4,23 @@ import 'package:foodly_app/Authentication/auth.dart';
 import 'package:foodly_app/widgets/navbar.dart';
 import 'package:foodly_app/widgets/products.dart';
 
+import '../controllers/product_controller.dart';
+import '../models/product.dart';
 import '../widgets/shopping_cart.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+
+class HomePage extends StatefulWidget {
+  List<ProductModel> main_list;
+
+  HomePage({Key? key, required this.main_list}) : super(key: key)
+  {}
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  ProducsController producsController = ProducsController.instance;
 
   final User? user = Auth().currentUser;
 
@@ -34,6 +47,14 @@ class HomePage extends StatelessWidget {
     );
   }
 
+ late List<ProductModel> d_list = producsController.products;
+
+  void updateList(String value) {
+    setState(() {
+          d_list = widget.main_list.where((element) => element.name.toLowerCase().contains(value.toLowerCase())).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +79,21 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[ProductsWidget(), _signOutButton()],
+          children: <Widget>[
+            TextField(
+              onChanged: (value) => updateList(value),
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Color.fromARGB(144, 243, 197, 70),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0), borderSide: BorderSide.none),
+                hintText: "eg. Chicken Gyro",
+                prefixIcon: Icon(Icons.search),
+                prefixIconColor: Colors.purple
+              ),
+            ),
+            ProductsWidget(products: d_list,),
+             _signOutButton()],
         ),
       ),
     );
