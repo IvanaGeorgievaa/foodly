@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:foodly_app/Authentication/auth.dart';
 import 'package:foodly_app/widgets/navbar.dart';
 import 'package:foodly_app/widgets/products.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../controllers/product_controller.dart';
 import '../models/product.dart';
 import '../widgets/shopping_cart.dart';
 
-
 class HomePage extends StatefulWidget {
   List<ProductModel> main_list;
 
-  HomePage({Key? key, required this.main_list}) : super(key: key)
-  {}
+  HomePage({Key? key, required this.main_list}) : super(key: key) {}
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -47,11 +46,23 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
- late List<ProductModel> d_list = producsController.products;
+  late List<ProductModel> d_list = producsController.products;
 
   void updateList(String value) {
     setState(() {
-          d_list = widget.main_list.where((element) => element.name.toLowerCase().contains(value.toLowerCase())).toList();
+      d_list = widget.main_list
+          .where((element) =>
+              element.name.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
+
+  void updateListbyCategory(String category) {
+    setState(() {
+      d_list = widget.main_list
+          .where((element) =>
+              element.category.toLowerCase().contains(category.toLowerCase()))
+          .toList();
     });
   }
 
@@ -66,10 +77,12 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(onPressed: () => Null, icon: const Icon(Icons.search)),
           IconButton(
-              onPressed: () =>  Navigator.push(
+              onPressed: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  ShoppingCartWidget()),
-                  ), icon: const Icon(Icons.shopping_bag))
+                    MaterialPageRoute(
+                        builder: (context) => ShoppingCartWidget()),
+                  ),
+              icon: const Icon(Icons.shopping_bag))
         ],
       ),
       body: Container(
@@ -80,20 +93,100 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: GestureDetector(
+                      onTap: () => updateListbyCategory('Breakfast'),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(144, 243, 197, 70),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Breakfast",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )),
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: GestureDetector(
+                      onTap: () => updateListbyCategory('Lunch'),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(144, 243, 197, 70),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Lunch",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )),
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: GestureDetector(
+                      onTap: () => updateListbyCategory('Dinner'),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(144, 243, 197, 70),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Dinner",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )),
+                ],
+              ),
+            ),
             TextField(
               onChanged: (value) => updateList(value),
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
-                filled: true,
-                fillColor: Color.fromARGB(144, 243, 197, 70),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0), borderSide: BorderSide.none),
-                hintText: "eg. Chicken Gyro",
-                prefixIcon: Icon(Icons.search),
-                prefixIconColor: Colors.purple
-              ),
+                  filled: true,
+                  fillColor: Color.fromARGB(144, 243, 197, 70),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide.none),
+                  hintText: "eg. Chicken Gyro",
+                  prefixIcon: Icon(Icons.search),
+                  prefixIconColor: Colors.purple),
             ),
-            ProductsWidget(products: d_list,),
-             _signOutButton()],
+            ProductsWidget(
+              products: d_list,
+            ),
+            _signOutButton()
+          ],
         ),
       ),
     );
