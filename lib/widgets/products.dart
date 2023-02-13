@@ -6,8 +6,9 @@ import 'package:get/get.dart';
 
 class ProductsWidget extends StatelessWidget {
   ProducsController producsController = ProducsController.instance;
+  final List<ProductModel> products;
 
-  ProductsWidget({super.key});
+  ProductsWidget({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ProductsWidget extends StatelessWidget {
       child: ListView(
           shrinkWrap: true,
           padding: const EdgeInsets.all(10),
-          children: producsController.products.map((ProductModel product) {
+          children: products.map((ProductModel product) {
             return SingleProductWidget(
               product: product,
             );
