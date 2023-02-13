@@ -52,15 +52,21 @@ class NavBar extends StatelessWidget {
                 )),
           ),
           ListTile(
-            leading: const Icon(Icons.restaurant),
-            title: const Text('Products'),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage(main_list: producsController.products)))),
+              leading: const Icon(Icons.restaurant),
+              title: const Text('Products'),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          HomePage(main_list: producsController.products)))),
           ListTile(
             leading: const Icon(Icons.search),
             title: const Text('Search'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        HomePage(main_list: producsController.products))),
           ),
           ListTile(
             leading: const Icon(Icons.shopping_cart),
@@ -88,7 +94,7 @@ class NavBar extends StatelessWidget {
           ),
           const Divider(),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 210),
+            padding: const EdgeInsets.symmetric(vertical: 160),
             child: ListTile(
               leading: const Icon(Icons.exit_to_app),
               title: const Text('Log Out'),
