@@ -46,6 +46,8 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   uuid: ^3.0.4
   cloud_firestore: ^4.3.1
+  geolocator: ^8.2.1
+  url_launcher: ^6.1.2
 
 dev_dependencies:
   flutter_test:
