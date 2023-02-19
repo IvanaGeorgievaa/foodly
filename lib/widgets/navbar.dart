@@ -6,7 +6,6 @@ import 'package:foodly_app/widgets/shopping_cart.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../controllers/product_controller.dart';
-import '../pages/location_page.dart';
 
 class NavBar extends StatelessWidget {
   NavBar({Key? key}) : super(key: key);
@@ -89,11 +88,6 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.location_on),
             title: const Text('Our location'),
             onTap:() => _openMap(),
-            // onTap: () =>  Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) =>
-            //               LocationPage())),
           ),
           const Divider(),
           ListTile(
