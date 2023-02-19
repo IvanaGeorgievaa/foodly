@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:foodly_app/Authentication/auth.dart';
 import 'package:foodly_app/pages/home_page.dart';
 import 'package:foodly_app/widgets/shopping_cart.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../controllers/product_controller.dart';
+import '../pages/location_page.dart';
 
 class NavBar extends StatelessWidget {
   NavBar({Key? key}) : super(key: key);
@@ -22,6 +24,13 @@ class NavBar extends StatelessWidget {
       style: const TextStyle(fontWeight: FontWeight.bold),
     );
   }
+
+  Future<void> _openMap() async {
+  String googleURL = 'https://www.google.com/maps/search/?api=1&query=41.9898734,21.4401741';
+  await canLaunchUrlString(googleURL)
+    ? await launchUrlString(googleURL)
+    : throw 'Could not launch $googleURL';
+}
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +88,12 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.location_on),
             title: const Text('Our location'),
-            onTap: () => null,
+            onTap:() => _openMap(),
+            // onTap: () =>  Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (context) =>
+            //               LocationPage())),
           ),
           const Divider(),
           ListTile(
