@@ -12,7 +12,7 @@ class Auth {
   User? get currentUser => _firebaseAuth.currentUser;
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
-  
+
   late Rx<User> firebaseUser;
   String usersCollection = "users";
 
@@ -35,15 +35,15 @@ class Auth {
   Future<void> createUserWithEmailAndPassword({
     required String email,
     required String password,
+    required String address,
   }) async {
     await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+        email: email, password: password);
     firebaseFirestore.collection(usersCollection).doc(currentUser?.uid).set({
       "id": currentUser?.uid,
       "email": email,
-      "cart": []
+      "cart": [],
+      "address": address
     });
   }
 

@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerAddress = TextEditingController();
 
   Future<void> signInWithEmailAndPassword() async {
     try {
@@ -33,9 +34,9 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> createUserWithEmailAndPassword() async {
     try {
       await Auth().createUserWithEmailAndPassword(
-        email: _controllerEmail.text,
-        password: _controllerPassword.text,
-      );
+          email: _controllerEmail.text,
+          password: _controllerPassword.text,
+          address: _controllerAddress.text);
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -137,6 +138,28 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _entryFieldAddress(
+    String title,
+    TextEditingController controller,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 30, left: 30),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: title,
+        ),
+      ),
+    );
+  }
+
+  Widget _emptyString() {
+    return const Padding(
+      padding: EdgeInsets.all(2),
+      child: Text(""),
+    );
+  }
+
   Widget _errorMessage() {
     return Text(errorMessage == '' ? '' : 'Humm ? $errorMessage');
   }
@@ -190,6 +213,9 @@ class _LoginPageState extends State<LoginPage> {
             _underText(),
             _entryFieldEmail('Email', _controllerEmail),
             _entryFieldPassword('Password', _controllerPassword),
+            isLogin
+                ? _emptyString()
+                : _entryFieldAddress('Address', _controllerAddress),
             _errorMessage(),
             _submitButton(),
             _loginOrRegisterButton(),
