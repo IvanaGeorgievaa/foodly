@@ -48,6 +48,9 @@ dependencies:
   cloud_firestore: ^4.3.1
   geolocator: ^8.2.1
   url_launcher: ^6.1.2
+  camera: ^0.9.7+1
+  get_it: ^7.2.0
+
 
 dev_dependencies:
   flutter_test:
