@@ -4,8 +4,8 @@ import 'package:foodly_app/Authentication/auth.dart';
 import 'package:foodly_app/pages/home_page.dart';
 import 'package:foodly_app/widgets/shopping_cart.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import '../controllers/product_controller.dart';
+import '../pages/camera/main_camera_screen.dart';
 
 class NavBar extends StatelessWidget {
   NavBar({Key? key}) : super(key: key);
@@ -25,11 +25,12 @@ class NavBar extends StatelessWidget {
   }
 
   Future<void> _openMap() async {
-  String googleURL = 'https://www.google.com/maps/search/?api=1&query=41.9898734,21.4401741';
-  await canLaunchUrlString(googleURL)
-    ? await launchUrlString(googleURL)
-    : throw 'Could not launch $googleURL';
-}
+    String googleURL =
+        'https://www.google.com/maps/search/?api=1&query=41.9898734,21.4401741';
+    await canLaunchUrlString(googleURL)
+        ? await launchUrlString(googleURL)
+        : throw 'Could not launch $googleURL';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +79,25 @@ class NavBar extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.shopping_cart),
-            title: const Text('Cart items'),
+            title: const Text('Cart Items'),
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ShoppingCartWidget()),
             ),
           ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.location_on),
-            title: const Text('Our location'),
-            onTap:() => _openMap(),
+            title: const Text('Our Location'),
+            onTap: () => _openMap(),
+          ),
+          ListTile(
+            leading: const Icon(Icons.camera_enhance),
+            title: const Text('Camera'),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const MainCameraScreen())),
           ),
           const Divider(),
           ListTile(
@@ -95,14 +105,9 @@ class NavBar extends StatelessWidget {
             title: const Text('Settings'),
             onTap: () => null,
           ),
-          ListTile(
-            leading: const Icon(Icons.account_box),
-            title: const Text('Account Details'),
-            onTap: () => null,
-          ),
           const Divider(),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 160),
+            padding: const EdgeInsets.symmetric(vertical: 140),
             child: ListTile(
               leading: const Icon(Icons.exit_to_app),
               title: const Text('Log Out'),
