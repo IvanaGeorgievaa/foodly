@@ -12,7 +12,7 @@ import '../controllers/auth_controller.dart';
 class CartController extends GetxController {
   static CartController instance = Get.find();
   RxDouble totalCartPrice = 0.0.obs;
- UserController userController = UserController.instance;
+  UserController userController = UserController.instance;
 
   @override
   void onReady() {
@@ -58,12 +58,21 @@ class CartController extends GetxController {
     }
   }
 
+  void removeAllCartItems() {
+    try {
+      userController.updateUserData({"cart": FieldValue.delete()});
+    } catch (e) {
+      Get.snackbar("Error", "Cannot remove cart items");
+      // debugPrint(e.message);
+    }
+  }
+
   changeCartTotalPrice(UserModel userModel) {
     totalCartPrice.value = 0.0;
     if (userModel.cart.isNotEmpty) {
       userModel.cart.forEach((cartItem) {
         totalCartPrice.value += cartItem.cost;
-      // totalCartPrice += cartItem.cost;
+        // totalCartPrice += cartItem.cost;
       });
     }
   }
@@ -73,24 +82,24 @@ class CartController extends GetxController {
           .where((item) => item.productId == product.id)
           .isNotEmpty;
 
-  void decreaseQuantity(CartItemModel item){
-    if(item.quantity == 1){
+  void decreaseQuantity(CartItemModel item) {
+    if (item.quantity == 1) {
       removeCartItem(item);
-    }else{
+    } else {
       removeCartItem(item);
       item.quantity--;
-          userController.updateUserData({
+      userController.updateUserData({
         "cart": FieldValue.arrayUnion([item.toJson()])
       });
     }
   }
 
-    void increaseQuantity(CartItemModel item){
-      removeCartItem(item);
-      item.quantity++;
-      logger.i({"quantity": item.quantity});
-          userController.updateUserData({
-        "cart": FieldValue.arrayUnion([item.toJson()])
-      });
+  void increaseQuantity(CartItemModel item) {
+    removeCartItem(item);
+    item.quantity++;
+    logger.i({"quantity": item.quantity});
+    userController.updateUserData({
+      "cart": FieldValue.arrayUnion([item.toJson()])
+    });
   }
 }
