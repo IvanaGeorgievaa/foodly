@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_app/pages/home_page.dart';
 
+import '../classes/state.dart';
+import '../classes/state_base.dart';
 import '../controllers/product_controller.dart';
 
 class OrderConfirmationPage extends StatelessWidget {
   ProducsController producsController = ProducsController.instance;
-  OrderConfirmationPage({super.key});
+  final StateBase stateBase = StateClass();
+
+  OrderConfirmationPage({super.key}) {
+    stateBase.setStateText("Your order has been confirmed!");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +30,8 @@ class OrderConfirmationPage extends StatelessWidget {
               size: 100,
             ),
             const SizedBox(height: 20),
-            const Text(
-              "Your order has been confirmed!",
+             Text(
+              stateBase.currentText,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
