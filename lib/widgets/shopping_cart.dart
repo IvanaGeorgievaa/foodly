@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../controllers/auth_controller.dart';
 import '../custom_text.dart';
+import '../pages/order_confirmation_page.dart';
 
 class ShoppingCartWidget extends StatelessWidget {
   UserController userController = UserController.instance;
@@ -74,24 +75,32 @@ class ShoppingCartWidget extends StatelessWidget {
           ),
           Padding(
               padding: const EdgeInsets.only(bottom: 10.0, left: 30, right: 30),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10.0),
-                ),
-                child: const Text(
-                  "Order Now",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ))
+              child: cartController.totalCartPrice.value > 0
+                  ? ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OrderConfirmationPage()));
+                        cartController.removeAllCartItems();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                      ),
+                      child: const Text(
+                        "Order Now",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink())
         ],
       ),
     );
