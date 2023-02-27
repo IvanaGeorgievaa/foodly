@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_app/controllers/cart_controller.dart';
+import 'package:foodly_app/controllers/order_controller.dart';
 import 'package:foodly_app/widgets/cart_item.dart';
 import 'package:foodly_app/widgets/navbar.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -11,6 +12,7 @@ import '../pages/order_confirmation_page.dart';
 class ShoppingCartWidget extends StatelessWidget {
   UserController userController = UserController.instance;
   CartController cartController = CartController.instance;
+  OrdersController ordersController = OrdersController.instance;
 
   ShoppingCartWidget({super.key});
 
@@ -83,6 +85,7 @@ class ShoppingCartWidget extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => OrderConfirmationPage()));
                         cartController.removeAllCartItems();
+                        ordersController.addToOrderCollection();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
