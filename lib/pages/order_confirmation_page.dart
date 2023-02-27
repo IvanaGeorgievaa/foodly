@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_app/pages/home_page.dart';
 
-import '../classes/state.dart';
-import '../classes/state_base.dart';
+import '../design_patterns/state.dart';
+import '../design_patterns/state_base.dart';
 import '../controllers/product_controller.dart';
 
 class OrderConfirmationPage extends StatelessWidget {

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodly_app/Authentication/auth.dart';
+import 'package:foodly_app/design_patterns/command/command_example.dart';
 import 'package:foodly_app/pages/home_page.dart';
 import 'package:foodly_app/widgets/shopping_cart.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -103,7 +104,10 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>  CommandExample())),
           ),
           const Divider(),
           Padding(

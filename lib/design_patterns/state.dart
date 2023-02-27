@@ -1,4 +1,4 @@
-import 'package:foodly_app/classes/state_base.dart';
+import 'package:foodly_app/design_patterns/state_base.dart';
 
 class StateClass extends StateBase {
   static final StateClass _instance = StateClass._internal();
