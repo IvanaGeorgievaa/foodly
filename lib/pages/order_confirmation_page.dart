@@ -30,9 +30,9 @@ class OrderConfirmationPage extends StatelessWidget {
               size: 100,
             ),
             const SizedBox(height: 20),
-             Text(
+            Text(
               stateBase.currentText,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
